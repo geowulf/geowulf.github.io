@@ -1,20 +1,26 @@
-/* The Wayteller — shared styles */
+/* The Wayteller — Route Map design system (live 2026-10-15)
+   Cream atlas paper, highway green, ink navy, road-sign gold.
+   Class vocabulary preserved from the original stylesheet so every
+   page restyles from this one file. */
 :root {
-  --paper: #faf7f1;
+  --paper: #f6efdd;
   --ink: #23272f;
-  --muted: #6b6f76;
-  --navy: #1b263b;
+  --muted: #6f6a58;
+  --navy: #16233a;
+  --green: #1e5b45;
+  --green-d: #14402f;
   --gold: #b08d4f;
-  --gold-soft: #f3e9d4;
-  --line: #e6ddcc;
-  --card: #ffffff;
+  --gold-soft: #f3e7cd;
+  --line: #ddd2b8;
+  --card: #fffdf6;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Cg fill='none' stroke='%23d9cba6' stroke-width='1.4' opacity='0.5'%3E%3Cpath d='M-20 120 C120 60 260 180 500 90'/%3E%3Cpath d='M-20 160 C120 100 260 220 500 130'/%3E%3Cpath d='M-20 340 C140 280 300 400 500 300'/%3E%3Cpath d='M-20 385 C140 325 300 445 500 345'/%3E%3Cpath d='M60 -20 C110 140 40 300 90 500'/%3E%3Cpath d='M105 -20 C155 140 85 300 135 500'/%3E%3C/g%3E%3C/svg%3E");
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.65;
@@ -27,54 +33,101 @@ h1, h2, h3, .brand {
   margin-top: 0;
 }
 
-a { color: var(--navy); }
+a { color: var(--green-d); }
 a:hover { color: var(--gold); }
 
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
-/* Header */
+/* Header — cream atlas bar with the highway-shield brand */
 .site-header {
-  background: var(--navy);
-  color: #fff;
-  padding: 20px 0;
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom: 2px solid var(--green);
+  padding: 14px 0;
 }
 .site-header .wrap {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
   max-width: 960px;
 }
-.brand { font-size: 26px; letter-spacing: 0.5px; }
-.brand a { color: #fff; text-decoration: none; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 24px;
+}
+.brand a { color: var(--ink); text-decoration: none; }
+.brand b { font-family: Georgia, "Times New Roman", serif; font-size: 24px; letter-spacing: 0.4px; display: block; line-height: 1.1; }
 .brand small {
   display: block;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 13px;
-  letter-spacing: 2px;
+  font-size: 11px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--gold);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 nav a {
-  color: #d8d2c4;
+  color: var(--ink);
   text-decoration: none;
   margin-left: 20px;
   font-size: 15px;
 }
-nav a:hover, nav a.active { color: var(--gold); }
+nav a:hover { color: var(--green); }
+nav a.active { color: var(--green-d); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
 
-/* Hero */
+/* Text hero (interior pages / legacy) */
 .hero { padding: 64px 0 48px; text-align: center; }
 .hero h1 { font-size: 44px; margin-bottom: 12px; }
 .hero .lede { font-size: 20px; color: var(--muted); max-width: 600px; margin: 0 auto; }
 
-/* Vote banner */
+/* Photo hero + highway-sign plate (homepage) */
+.hero-photo { position: relative; min-height: 430px; display: flex; align-items: center; justify-content: center; text-align: center; background-color: #0e1626; background-size: cover; background-position: center 62%; }
+.hero-photo:before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,18,34,.38), rgba(10,18,34,.10) 40%, rgba(10,18,34,.45)); }
+.sign { position: relative; background: var(--green-d); border: 3px solid #f3ead2; border-radius: 18px; outline: 2px dashed rgba(243,234,210,.75); outline-offset: -11px; padding: 38px 54px 30px; max-width: 640px; margin: 56px 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); }
+.sign h1 { color: #f7efdb; font-size: 52px; margin: 0 0 6px; letter-spacing: .5px; }
+.sign .tag { color: var(--gold); font-size: 19px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 14px; }
+.sign .lede { color: #e9dfc8; font-size: 17px; margin: 0 auto; max-width: 480px; }
+
+/* Route spine + stops (homepage) */
+.route { position: relative; padding: 16px 0 8px; }
+.route:before { content: ""; position: absolute; left: 39px; top: 0; bottom: 0; border-left: 4px dashed var(--green); opacity: .55; }
+.stop { position: relative; padding: 26px 0 26px 96px; }
+.marker { position: absolute; left: 8px; top: 26px; width: 64px; height: 64px; border-radius: 50%; background: var(--green); border: 3px solid #f3ead2; box-shadow: 0 0 0 2px var(--green); color: #f7efdb; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: Georgia, serif; line-height: 1; }
+.marker .mm { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: .85; }
+.marker .no { font-size: 22px; font-weight: 700; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 26px; box-shadow: 0 2px 10px rgba(35,39,47,.05); }
+.panel h2 { font-size: 26px; margin-bottom: 6px; color: var(--navy); }
+.panel p { margin: 0 0 10px; color: #4c4a41; }
+.panel.vote { background: var(--gold-soft); border: 1px solid var(--gold); }
+.panel.philo { background: var(--navy); border-color: var(--navy); }
+.panel.philo h2 { color: #f7efdb; }
+.panel.philo p { color: #cfc9b8; }
+.panel.philo .btn { background: var(--gold); color: var(--navy); }
+.stories { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.story { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; display: block; box-shadow: 0 2px 10px rgba(35,39,47,.05); }
+.story img { width: 100%; height: 170px; object-fit: cover; display: block; filter: sepia(.22) saturate(1.02); }
+.story .in { padding: 16px 20px 20px; display: block; }
+.story h3 { font-size: 21px; margin: 0 0 6px; color: var(--navy); }
+.story p { margin: 0; color: var(--muted); font-size: 15px; }
+.chip { display: inline-block; background: var(--green); color: #f7efdb; border-radius: 20px; font-size: 12px; letter-spacing: 1.5px; padding: 3px 12px; margin-bottom: 10px; text-transform: uppercase; }
+.cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mini { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; text-decoration: none; color: inherit; display: block; }
+.mini h3 { margin: 0 0 6px; font-size: 20px; color: var(--navy); }
+.mini p { margin: 0; color: var(--muted); font-size: 15px; }
+.closing { color: var(--muted); max-width: 700px; }
+.scale { letter-spacing: 2px; text-transform: uppercase; font-size: 12px; color: #7e887a; }
+
+/* Vote banner (legacy) */
 .vote-banner {
   background: var(--gold-soft);
   border: 1px solid var(--gold);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 24px 28px;
   margin: 32px 0;
   display: flex;
@@ -107,11 +160,12 @@ nav a:hover, nav a.active { color: var(--gold); }
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 28px 24px;
   text-decoration: none;
   color: inherit;
   display: block;
+  box-shadow: 0 2px 10px rgba(35,39,47,.05);
 }
 .card:hover { border-color: var(--gold); }
 .card h3 { margin: 0 0 8px; font-size: 22px; }
@@ -123,6 +177,15 @@ nav a:hover, nav a.active { color: var(--gold); }
   color: var(--gold);
   display: block;
   margin-bottom: 10px;
+}
+.kicker {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
 }
 
 /* Page body */
@@ -145,7 +208,7 @@ nav a:hover, nav a.active { color: var(--gold); }
 .post-figure img {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--line);
   display: block;
 }
@@ -160,13 +223,14 @@ nav a:hover, nav a.active { color: var(--gold); }
 .vote-hero { text-align: center; padding: 48px 0 24px; }
 .vote-hero h1 { font-size: 40px; }
 .qr-box {
-  background: #fff;
-  border: 1px solid var(--line);
+  background: var(--card);
+  border: 1px solid var(--gold);
   border-radius: 16px;
   padding: 36px;
   text-align: center;
   margin: 32px auto;
   max-width: 520px;
+  box-shadow: 0 2px 10px rgba(35,39,47,.05);
 }
 .qr-box img { max-width: 320px; width: 100%; height: auto; }
 .fine { color: var(--muted); font-size: 14px; text-align: center; }
@@ -174,16 +238,25 @@ nav a:hover, nav a.active { color: var(--gold); }
 /* Footer */
 .site-footer {
   background: var(--navy);
+  border-top: 3px solid var(--green);
   color: #a9a294;
   padding: 32px 0;
   font-size: 14px;
   margin-top: 48px;
 }
-.site-footer .wrap { max-width: 960px; }
+.site-footer .wrap { max-width: 960px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .site-footer a { color: #d8d2c4; }
 
 hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
 
+@media (max-width: 700px) {
+  .stories, .cards3 { grid-template-columns: 1fr; }
+  .sign h1 { font-size: 38px; }
+  .sign { padding: 28px 26px 22px; }
+  .stop { padding-left: 84px; }
+  .route:before { left: 35px; }
+  .marker { width: 56px; height: 56px; left: 6px; }
+}
 @media (max-width: 600px) {
   .hero h1 { font-size: 34px; }
   nav a { margin-left: 14px; }
